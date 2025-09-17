@@ -35,7 +35,7 @@ def main(args):
 
     )
 
-    runner = DeepSearchRunner(engine_args, llm_configs) # # ←核心执行引擎
+    runner = DeepSearchRunner(engine_args, llm_configs) 
 
 
     # Batch processing of articles from the JSON file
@@ -51,7 +51,7 @@ def main(args):
         title = row['title'] 
         background = row['fact']
         
-        # 根据需求运行处理
+    
         runner.run(
             title=title,  
             background=background,
@@ -63,7 +63,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    # ↓核心参数设置说明：
     parser.add_argument('--search-top-k', type=int, default=2,
                         help='Top k search results to consider for each search query.')
     
