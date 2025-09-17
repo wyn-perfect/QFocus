@@ -12,7 +12,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def save_results_to_json(
     results,
-    json_dir: str = "/Users/wangyini/Desktop/code/storm-branch/storm/src/result/search_results_db",  # Directory path for the JSON file
+    json_dir: str = "search_results_db",  # Directory path for the JSON file
     json_file: str = "search_data.json"  # File name for the JSON file
 ):
     """
@@ -247,7 +247,7 @@ class TavilySearchRM(dspy.Retrieve):
                     total_successful_links += successful_links_in_query  
                     total_faith_links+=faithful_links_in_query
                 
-                    break  # 如果成功获取结果，跳出重试循环
+                    break  
                 except Exception as e:
                     retries += 1
                     print(f"Error occurred, attempt {retries}/{self.max_retries}: {e}")
@@ -262,7 +262,7 @@ class TavilySearchRM(dspy.Retrieve):
         save_results_to_json(collected_results)
         save_results_to_json(combind_results,json_file="combind.json")
        
-        # 打印统计信息
+        
         print(f"Total queries: {total_queries}")
         print(f"Successful queries: {successful_queries}")
         print(f"Failed queries: {failed_queries}")
