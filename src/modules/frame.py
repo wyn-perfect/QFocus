@@ -460,10 +460,10 @@ if __name__ == "__main__":
 if __name__ == "__main__":
     
     extract_frames_from_md_folder(
-    input_dir="/Users/wangyini/Desktop/code/storm-cursor-clean/tmp",
-    output_dir="/Users/wangyini/Desktop/code/storm-cursor-clean/md_output"
+    input_dir="",
+    output_dir=""
 )
-    article_generate_frame_one(input_dir='/Users/wangyini/Desktop/code/storm-cursor-clean/tmp/a',output_dir='/Users/wangyini/Desktop/code/storm-cursor-clean/md_output')
+    article_generate_frame_one(input_dir,output_dir)
     
 
 
