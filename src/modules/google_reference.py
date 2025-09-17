@@ -1,7 +1,7 @@
 import os
 import re
 from typing import Union
-from modules.rm import TavilySearchRM  # 导入检索模块
+from modules.rm import TavilySearchRM  
 import dspy
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -101,9 +101,7 @@ class DetailedQueryGenerate_no_focus(dspy.Module):
         with dspy.settings.context(lm=self.engine):
 
             query_result = self.generate_queries(topic=topic, section_theme=section_theme, background=background, question=question).detailed_query
-            print("-----------------query_result------------------")
             query_result = re.findall(r'\d+\:\s*(.*?)\n', query_result)
-            print(query_result)
             return dspy.Prediction(detailed_query=query_result)
 
 
@@ -163,13 +161,11 @@ class SearchWithExclusions_with_focus(dspy.Module):
             ).search_entries
 
             # Display the original generated queries
-            # print("----------------Generated Raw Queries--------------------")
-            # print(queries)
+            
+            
             queries = re.findall(r'\d+\.\s*(.*?)\n', queries)
             # Extract and clean the queries using regular expressions
-            # print("--------------Cleaned Queries After Regex-----------------")
             queries = list(set(queries))
-            
             # Perform the search with the generated queries and exclude the given URLs
             searched_results = self.retrieve(
                 list(set(queries)), exclude_urls=[ground_truth_url]
@@ -233,12 +229,8 @@ class DetailedQueryGenerate_with_focus(dspy.Module):
                 sub_dimensions=sub_dimensions,
                 background_info=background
             ).search_queries
-            #print(query_result)
-            print("-----------------Generated 检索片段的条目 ------------------")
-            # print(query_result)
             
             query_result = re.findall(r'\d+[.:]\s*(.*?)\n', query_result)
-            print(query_result)
 
             return dspy.Prediction(search_queries=query_result)
 
