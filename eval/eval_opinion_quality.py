@@ -1,20 +1,3 @@
-"""
-评估文章还原的好不好
-输入 题目
-原文：在 指定的文件夹中获取原文的frame框 路径如下/Users/wangyini/Desktop/code/storm-branch/storm/results/share/arc/frame
-还原的文章： 获取还原文章的frame的框架 "/Users/wangyini/Desktop/code/storm-branch/storm/results/gpt3.5/restore_frame
-
-提取原文中的核心观点 和结论
-提取还原文章中的核心观点 和结论 
-
-然后判断 还原文章的狠心观点和结论是否和原文文章核心观点和结论是否匹配 或者说是覆盖度有多少
-第一种方法： 就是两个列表 第一个列表中核心观点被覆盖的gailv
-第二种方法； 一对 一对的比较 如果对数不满足就用方法一的方式
-第三种方法： 一对一对 没有说明这篇文章在抽的时候不好 直接跳过
-
-
-"""
-
 import os
 
 from sentence_transformers import SentenceTransformer
