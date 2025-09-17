@@ -644,7 +644,7 @@ def extract_key_elements(data_dict):
             if argument:
                 analysis_argument.append(argument)
 
-        # 提取政策建议内容和针对的问题或目标
+        
         policy_advice = []
         for advice in data_dict.get('政策建议', []):
             content = advice.get('政策建议内容', '')
@@ -663,7 +663,7 @@ def extract_key_elements(data_dict):
             if target:
                 policy_advice_target.append(target)
 
-        # 返回提取的结果
+       
         return {
             "研究主题": research_theme,
             "主要问题": main_issues,
