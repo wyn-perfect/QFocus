@@ -74,9 +74,7 @@ def extract_elements_from_frame(json_path):
 
 
 
-####################
-#### 读文件 存文件
-###################
+
 
 def dump_json(obj, file_name, encoding="utf-8"):
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
@@ -84,7 +82,6 @@ def dump_json(obj, file_name, encoding="utf-8"):
         json.dump(obj, fw, ensure_ascii=False,indent=4)
 
 def load_json(file_path, n=None):
-    # 从指定路径读取 JSON 文件，并返回前 n 条数据作为字典列表
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
