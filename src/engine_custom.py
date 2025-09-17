@@ -1,14 +1,14 @@
-import concurrent.futures # 并发执行：多线程处理搜索任务
-import functools  # 装饰器工具：记录函数执行时长
-import json  # JSON数据处理：保存对话日志 
-import logging  # 日志系统：记录运行状态    
-import os  # 文件路径处理  
-import time   # 耗时统计 
+import concurrent.futures 
+import functools  
+import json  
+import logging  
+import os  
+import time  
 from typing import List, Optional     
-from concurrent.futures import as_completed  # 获取线程执行结果
-from dataclasses import dataclass, field  # 数据类定义：参数容器
+from concurrent.futures import as_completed  
+from dataclasses import dataclass, field  
 from modules.google_reference import SearchWithExclusions_no_focus, SearchWithExclusions_with_focus,DetailedQueryGenerate_no_focus,DetailedQueryGenerate_with_focus # 引入用于检索的类
-from modules.rm import TavilySearchRM  # 导入检索模块
+from modules.rm import TavilySearchRM  
 from modules.reference import extract_elements_from_evident,extract_elements_from_frame
 from sentence_transformers import SentenceTransformer
 import concurrent.futures
@@ -100,11 +100,11 @@ class DeepSearchRunner:
     @log_execution_time
     def _generate_ref(self,
                       search_top_k :int = 2, # default = 2 
-                      json_path: str = '/Users/wangyini/Desktop/code/storm-branch/storm/dataset/articles_new.json',
-                      input_dir: str ="/Users/wangyini/Desktop/code/storm-branch/storm/results/share",
-                      tavily_api_keys: List[str] = [], #
-                      start_index: int = 0,  # 指定起始文章序号
-                      end_index: Optional[int] = None  # 指定结束文章序号
+                      json_path: str = 'articles_new.json',
+                      input_dir: str ="share",
+                      tavily_api_keys: List[str] = [], 
+                      start_index: int = 0,  
+                      end_index: Optional[int] = None  
                       ):
         """
         the function is to extract the fact and evident from initial artical,and then generate the search query,
@@ -122,7 +122,7 @@ class DeepSearchRunner:
                 }
         """
 
-        # 初始化当前使用的 API Key 索引和文章计数器
+        
         current_key_index = 0
         
         # Load articles from the provided JSON file
@@ -228,11 +228,11 @@ class DeepSearchRunner:
             
                 # Submit tasks for each section
                 for theme, question, analysis_angle in zip(themes, questions, analysis_angles):
-                    future = executor.submit(generate_search_queries, theme, question, analysis_angle) # 这个是每个任务执行结果返回的对象叫future
-                    future_to_theme[future] = theme #future_to_theme 字典 键值是future  值是当前的主题
+                    future = executor.submit(generate_search_queries, theme, question, analysis_angle) 
+                    future_to_theme[future] = theme 
                     
                 for future in concurrent.futures.as_completed(future_to_theme):
-                    init_info, init_deep_info = future.result() # 提取每个任务的结果
+                    init_info, init_deep_info = future.result() 
                     theme = future_to_theme[future]
                     info_no_angle[theme] = init_info
                     info_with_angle[theme] = init_deep_info
@@ -276,7 +276,7 @@ class DeepSearchRunner:
 
     @log_execution_time
     def _generate_outline_custom(self,
-                          json_path:str,#文章的存储位置
+                          json_path:str,
                           ):
         """
         Extract the frame from an article.
@@ -285,7 +285,7 @@ class DeepSearchRunner:
         json_path (str): Path to the JSON file containing article data.
         """
         
-        # json_path = "/Users/wangyini/Desktop/code/storm-branch/storm/dataset/articles_new.json"
+        # json_path = "articles_new.json"
         article_generate_frame_batch(json_path, self.args.output_dir,0,1)
         #article_generate_frame_one(json_path, output_dir)
 
@@ -295,7 +295,7 @@ class DeepSearchRunner:
     def _generate_article_custom(self, 
                                  title = "",
                                  background = "",
-                                 base_dir = "/Users/wangyini/Desktop/code/storm-cursor-clean/result-new"
+                                 base_dir = "result-new"
                                 ):
     
         
@@ -548,7 +548,7 @@ class DeepSearchRunner:
             do_polish_article_custom: bool = False,
             callback_handler: BaseCallbackHandler = BaseCallbackHandler()):
         
-        json_path = "/Users/wangyini/Desktop/code/storm-branch/storm/dataset/articles_new.json" # 原文章存储的路径是固定的
+        json_path = "articles_new.json" 
         tavily_api_keys = [
         "XXX"
         ]
